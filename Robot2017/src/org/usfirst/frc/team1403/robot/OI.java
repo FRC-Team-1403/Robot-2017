@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1403.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team1403.robot.commands.ExampleCommand;
@@ -14,7 +15,8 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
-	// Joystick stick = new Joystick(port);
+	public Joystick djoy = new Joystick(0);
+	public Joystick ojoy = new Joystick(1);
 	// Button button = new JoystickButton(stick, buttonNumber);
 
 	// There are a few additional built in buttons you can use. Additionally,
