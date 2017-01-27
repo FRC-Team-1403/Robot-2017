@@ -110,7 +110,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Shooter Speed",Robot.f);
+		
 		//Testing GitHub
 	}
 

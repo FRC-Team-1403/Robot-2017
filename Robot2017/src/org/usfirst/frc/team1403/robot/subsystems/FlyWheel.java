@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1403.robot.subsystems;
 
+import org.usfirst.frc.team1403.robot.Robot;
 import org.usfirst.frc.team1403.robot.commands.ShootWithJoystick;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -20,12 +21,12 @@ public class FlyWheel extends Subsystem {
         setDefaultCommand(new ShootWithJoystick());
     }
     
-    public void setShooterSpeed(double shooterSpeed){
-    	fw.set(SmartDashboard.getNumber("Shooter Speed", shooterSpeed));
-    	
+    public void ShootingWithSmartDashBoard()
+    {
+    	 fw.set(SmartDashboard.getNumber("Shooter Speed", 0));
     }
     public void ShootingWithJoystick(double joystickShoot){
-    	fw.set(joystickShoot);
+    	this.fw.set(joystickShoot);
     }
 }
 
