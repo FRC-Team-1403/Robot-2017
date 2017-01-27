@@ -23,7 +23,7 @@ public class TrajectoryDriveController {
   TrajectoryFollower followerRight = new TrajectoryFollower();
   double direction;
   double heading;
-  double kTurn = SmartDashboard.getNumber("kTurn", -3.0/80.0);
+  double kTurn = -3.0/80.0;
   boolean enabled = false;
 
   public boolean onTarget() {
@@ -79,7 +79,7 @@ public class TrajectoryDriveController {
       double speedRight = direction * followerRight.calculate(distanceR);
       
       double goalHeading = followerLeft.getHeading();
-      double observedHeading = Robot.dt.gyro.getAngle();
+      double observedHeading = Robot.dt.getAngleInRadians();
 
       double angleDiffRads = ChezyMath.getDifferenceInAngleRadians(observedHeading, goalHeading);
       double angleDiff = Math.toDegrees(angleDiffRads);

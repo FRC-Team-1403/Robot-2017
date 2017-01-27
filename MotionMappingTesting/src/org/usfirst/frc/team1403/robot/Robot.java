@@ -32,7 +32,6 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain dt;
 	public static OI oi;
 	public static Path lowBarPath;
-	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -54,13 +53,14 @@ public class Robot extends IterativeRobot {
 		config.max_vel = 9.0;
 		String path_name = "LowBarPath";
 		WaypointSequence waypointsequence = new WaypointSequence(10);
-		waypointsequence.addWaypoint(new Waypoint(4,0,0));
-		//waypointsequence.addWaypoint(new Waypoint(2,0,0));
-		waypointsequence.addWaypoint(new Waypoint(0,0,0));
+		waypointsequence.addWaypoint(new Waypoint(0, 0, 0));
+		waypointsequence.addWaypoint(new Waypoint(0.5, 0.5, 0));
+		//waypointsequence.addWaypoint(new Waypoint(1, 1, Math.PI/4));
 		lowBarPath = PathGenerator.makePath(waypointsequence, config, kWheelbaseWidth, path_name);
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+	
 		
 	}
 
@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		
+		
 	}
 
 	@Override
@@ -131,7 +132,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
+		SmartDashboard.putNumber("Left Encoder Value", Robot.dt.leftEncoder.get());
+		SmartDashboard.putNumber("Right Encoder Value", Robot.dt.rightEncoder.get());
+		SmartDashboard.putNumber("Gyro Value", Robot.dt.getAngleInRadians());
 	}
 
 	/**
