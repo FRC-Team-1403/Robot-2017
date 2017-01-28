@@ -23,7 +23,7 @@ public class TrajectoryDriveController {
   TrajectoryFollower followerRight = new TrajectoryFollower();
   double direction;
   double heading;
-  double kTurn = -3.0/80.0;
+  public double kTurn = -3/80.0/1000;
   boolean enabled = false;
 
   public boolean onTarget() {
@@ -31,8 +31,8 @@ public class TrajectoryDriveController {
   }
 
   private void init() {
-    followerLeft.configure(1.5, 0, 0, 1.0/15.0, 1.0/34.0);
-    followerRight.configure(1.5, 0, 0, 1.0/15.0, 1.0/34.0);
+    followerLeft.configure(1.5, 0, 0, 1.0/5.0, 1.0/10.0);
+    followerRight.configure(1.5, 0, 0, 1.0/5.0, 1.0/10.0);
   }
 
   public void loadProfile(Trajectory leftProfile, Trajectory rightProfile, double direction, double heading) {
@@ -72,8 +72,8 @@ public class TrajectoryDriveController {
     if (onTarget()) {
       Robot.dt.setLeftRightPower(0.0, 0.0);
     } else  {
-      double distanceL = direction * Robot.dt.leftEncoder.get();
-      double distanceR = direction * Robot.dt.rightEncoder.get();
+      double distanceL = direction * Robot.dt.getLeftEncoderInFeet();
+      double distanceR = direction * Robot.dt.getRightEncoderInFeet();
 
       double speedLeft = direction * followerLeft.calculate(distanceL);
       double speedRight = direction * followerRight.calculate(distanceR);
@@ -85,8 +85,8 @@ public class TrajectoryDriveController {
       double angleDiff = Math.toDegrees(angleDiffRads);
 
       double turn = kTurn * angleDiff;
-      //Robot.dt.setLeftRightPower(speedLeft + turn, speedRight - turn);
-      Robot.dt.setLeftRightPower(speedLeft, speedRight);
+      Robot.dt.setLeftRightPower(speedLeft + turn, speedRight - turn);
+     // Robot.dt.setLeftRightPower(speedLeft, speedRight);
       SmartDashboard.putNumber("speedLeft", speedLeft);
       SmartDashboard.putNumber("speedRight", speedRight);
       SmartDashboard.putNumber("speedLeft + turn", speedLeft + turn);

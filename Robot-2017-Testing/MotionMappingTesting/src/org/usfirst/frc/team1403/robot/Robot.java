@@ -48,14 +48,14 @@ public class Robot extends IterativeRobot {
 		TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 		double kWheelbaseWidth = 23.5/12;
 		config.dt = 0.02;
-		config.max_acc = 30.0;
+		config.max_acc = 10.0;
 		config.max_jerk = 40.0;
-		config.max_vel = 9.0;
+		config.max_vel = 5.0;
 		String path_name = "LowBarPath";
 		WaypointSequence waypointsequence = new WaypointSequence(10);
 		waypointsequence.addWaypoint(new Waypoint(0, 0, 0));
-		waypointsequence.addWaypoint(new Waypoint(0.5, 0.5, 0));
-		//waypointsequence.addWaypoint(new Waypoint(1, 1, Math.PI/4));
+		waypointsequence.addWaypoint(new Waypoint(2,2,(Math.PI/9)));
+		waypointsequence.addWaypoint(new Waypoint(3,3, 0));
 		lowBarPath = PathGenerator.makePath(waypointsequence, config, kWheelbaseWidth, path_name);
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

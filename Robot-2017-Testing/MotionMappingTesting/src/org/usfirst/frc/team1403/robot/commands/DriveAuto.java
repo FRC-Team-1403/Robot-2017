@@ -3,6 +3,7 @@ package org.usfirst.frc.team1403.robot.commands;
 import org.usfirst.frc.team1403.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import trajectoryLib.trajectory.TrajectoryDriveController;
 
 /**
@@ -25,6 +26,7 @@ public class DriveAuto extends Command {
     	Robot.dt.gyro.reset();
     	driveController.loadProfile(Robot.lowBarPath.getLeftWheelTrajectory(), Robot.lowBarPath.getRightWheelTrajectory(), 1.0, Robot.dt.gyro.getAngle());
     	//okay this might screw you later lol
+    	driveController.kTurn = SmartDashboard.getNumber("kTurn", 0);
     	driveController.enable();
     
     }
