@@ -1,0 +1,50 @@
+
+
+import geargrip
+import centerTest
+import cv2
+import numpy as np
+from networktables import NetworkTable
+
+
+class NTClient():
+	def __init__(self):
+	 	ip = ""
+        	NetworkTable.setClientMode()
+        	NetworkTable.setIPAddress(ip)
+        	NetworkTable.initialize()
+        	sd = NetworkTable.getTable("SmartDashboard")
+		self.table = sd
+	
+#	def publish(self, x, key) :
+#		self.table.putStringArray(key,x)	
+
+def main() :
+#        a = geargrip.GearTape()
+	a = centerTest.centerTest()
+        cam = cv2.VideoCapture("http://10.14.3.24/mjpg/video.mjpg")
+	if cam.isOpened():
+		print("CONNECTED")
+	ret, frame = cam.read()
+#	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        a.set_source0(frame)
+	a.process()
+        output = np.array(a.filter_contours_output)
+	nt = NTClient()
+        for i in output :
+                print("NEW ARRAY ==================================================================")
+                print(i)
+                array = []
+                for coordinates in i :
+                        co = np.array(coordinates)[0]
+                        array.append(str(co))
+                print(array)
+#		nt.publish(array,"Array 6")
+        print(output.shape)
+        print "Hello"
+#	cv2.imshow('image',frame)
+	cam.release()
+
+
+if __name__ == '__main__' :
+	main()
