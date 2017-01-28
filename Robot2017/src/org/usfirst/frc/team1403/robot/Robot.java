@@ -12,6 +12,7 @@ import org.usfirst.frc.team1403.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1403.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1403.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1403.robot.subsystems.FlyWheel;
+import org.usfirst.frc.team1403.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static FlyWheel flyWheel;
+	public static Intake intake;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		flyWheel = new FlyWheel();
+		intake = new Intake();
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

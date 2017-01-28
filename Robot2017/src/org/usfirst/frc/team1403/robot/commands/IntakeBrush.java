@@ -4,11 +4,14 @@ import org.usfirst.frc.team1403.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveWithJoystick extends Command {
+/**
+ *
+ */
+public class IntakeBrush extends Command {
 
-    public DriveWithJoystick() {
+    public IntakeBrush() {
         // Use requires() here to declare subsystem dependencies
-         requires(Robot.driveTrain);
+         requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -17,7 +20,7 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.tankDrive(Robot.oi.djoy.getRawAxis(1), Robot.oi.djoy.getRawAxis(5));
+    	Robot.intake.moveIntakeBrush(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

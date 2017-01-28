@@ -2,8 +2,10 @@ package org.usfirst.frc.team1403.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team1403.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1403.robot.commands.IntakeBrush;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,7 +19,8 @@ public class OI {
 	// number it is.
 	public Joystick djoy = new Joystick(0);
 	public Joystick ojoy = new Joystick(1);
-	// Button button = new JoystickButton(stick, buttonNumber);
+	Button Xojoy = new JoystickButton(ojoy, 3);
+	
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -26,16 +29,17 @@ public class OI {
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
 	// three ways:
-
+	public OI(){
 	// Start the command when the button is pressed and let it run the command
 	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
+	Xojoy.whileHeld(new IntakeBrush());
+	
 	// Run the command while the button is being held down and interrupt it once
 	// the button is released.
-	// button.whileHeld(new ExampleCommand());
+	// Xojoy.whileHeld(new IntakeBrush());
 
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+}
 }
