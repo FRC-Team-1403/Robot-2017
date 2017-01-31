@@ -34,6 +34,7 @@ def main(nt, cam):
 	xavg = 0
 	c = 0
 	wid = 0
+	avgangle = 0
         for i in output :
 #                print("NEW ARRAY ===================================================================")
 #                print(i)
@@ -44,6 +45,7 @@ def main(nt, cam):
 #                print(array)
 		x,y,w,h = cv2.boundingRect(i)
 		xavg += x
+		avgangle += math.acos(w/2.0)
 		if c == output.shape[0] - 1 :
 			xavg += w
 			wid = w
@@ -55,9 +57,10 @@ def main(nt, cam):
 		wid = 0
 	elif output.shape[0] > 0:
 		mid = xavg/output.shape[0]
-		d = 2 * 320 / (2 * wid * math.tan(0.488692))
-		print "distance"
-		print d
+		avgangle /= c
+	#	d = 2 * 320 / (2 * wid * math.tan(0.488692))
+	#	print "distance"
+	#	print d
 	print "mid"
 	print(mid)
 	diff = 160 - mid
