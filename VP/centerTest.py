@@ -16,8 +16,8 @@ class centerTest:
         self.__source0 = None
         self.__cv_resize_src = self.__source0
         self.__cv_resize_dsize = (0, 0)
-        self.__cv_resize_fx = 0.5
-        self.__cv_resize_fy = 0.5
+        self.__cv_resize_fx = 1.0
+        self.__cv_resize_fy = 1.0
         self.__cv_resize_interpolation = cv2.INTER_LINEAR
         self.cv_resize_output = None
 

@@ -55,11 +55,13 @@ def main(nt, cam):
 		wid = 0
 	elif output.shape[0] > 0:
 		mid = xavg/output.shape[0]
-		d = 2 * 160 / (2 * wid * math.tan(0.488692))
+		d = 2 * 320 / (2 * wid * math.tan(0.488692))
 		print "distance"
 		print d
+	print "mid"
 	print(mid)
-	diff = 80 - mid
+	diff = 160 - mid
+	print "difference"
 	print diff
 	nt.publish(diff, "difference")
         print "Hello"
