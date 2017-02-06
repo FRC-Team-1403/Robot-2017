@@ -17,9 +17,9 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public Victor v0 = new Victor(0);
-	public Victor v1 = new Victor(1);
+	//public Victor v1 = new Victor(1);
 	public Victor v2 = new Victor(2);
-	public Victor v3 = new Victor(3);
+	//public Victor v3 = new Victor(3);
 	public Encoder leftEncoder = new Encoder(0, 1);
 	public Encoder rightEncoder = new Encoder(2, 3);
 	public AnalogGyro gyro = new AnalogGyro(0);
@@ -32,8 +32,11 @@ public class DriveTrain extends Subsystem {
 		gyro.reset();
 		leftEncoder.setReverseDirection(true);
 		rightEncoder.setReverseDirection(true);
-		leftEncoder.setDistancePerPulse((Math.PI/384));
-		rightEncoder.setDistancePerPulse((Math.PI/384));
+		//wheel circumference: 24.5 inches
+		//left encoder 130 ticks/rev
+		//right encoder 256 ticks/rev
+		leftEncoder.setDistancePerPulse(.0157051282);
+		rightEncoder.setDistancePerPulse(.0079752604);
 		timer = new Timer();
 		timer.start();
 	}
@@ -45,11 +48,13 @@ public class DriveTrain extends Subsystem {
     
     public void setLeftRightPower(double leftPower, double rightPower)
     {
-    	v0.set(rightPower);
+    	v0.set(-rightPower);
     	//v1.set(rightPower);
-    	v2.set(-leftPower);
+    	v2.set(leftPower);
     	//v3.set(-leftPower);
     }
+    
+    
     
     public double getAngleInRadians() {
     	
@@ -59,11 +64,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoderInFeet() {
-    	return leftEncoder.get() * Math.PI/384;
+    	return leftEncoder.get() * .0157051282;
     }
     
     public double getRightEncoderInFeet() {
-    	return rightEncoder.get() * Math.PI/384;
+    	return rightEncoder.get() * .0079752604;
     }
     
     public double getVelocity() {

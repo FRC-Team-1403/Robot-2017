@@ -17,7 +17,6 @@ public class DriveWithJoystick extends Command {
     public DriveWithJoystick() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.dt);
-       
     }
 
     // Called just before this Command runs the first time
@@ -27,25 +26,20 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.dt.setLeftRightPower(Robot.oi.stick.getRawAxis(1), Robot.oi.stick.getRawAxis(5));
-		SmartDashboard.putNumber("gyro murray", Robot.dt.gyro.getAngle());
-		SmartDashboard.putNumber("Velocity", Math.abs(Robot.dt.getVelocity()));
+    	Robot.dt.setLeftRightPower(-Robot.oi.stick.getRawAxis(1), -Robot.oi.stick.getRawAxis(5));
+    	
+		SmartDashboard.putNumber("Gyro Heading", Robot.dt.gyro.getAngle());
+		//SmartDashboard.putNumber("Velocity", Math.abs(Robot.dt.getVelocity()));
 		SmartDashboard.putNumber("Acceleration", Math.abs(Robot.dt.getAcceleration()));
-		//Pi/384 = feet per tick
-		//384/PI = ticks per feet (about 122.23 ticks per feet)
+		SmartDashboard.putNumber("Left Encoder in feet", Robot.dt.getLeftEncoderInFeet());
+		SmartDashboard.putNumber("Right Encoder in feet", Robot.dt.getRightEncoderInFeet());
+		SmartDashboard.putNumber("Velocity from left encoder", Robot.dt.leftEncoder.getRate());
+    	SmartDashboard.putNumber("Velocity from right encoder", Robot.dt.rightEncoder.getRate());
 		
-		if(Math.abs(Robot.dt.getAcceleration()) > Robot.dt.maxAcceleration) {
-			Robot.dt.maxAcceleration = Robot.dt.getAcceleration();
-		}else{
-			System.out.println(Math.abs(Robot.dt.getAcceleration()) + "is less than " + maxAcceleration);
+		if(Robot.oi.stick.getRawButton(1)){
+			Robot.dt.leftEncoder.reset();
+			Robot.dt.rightEncoder.reset();
 		}
-		SmartDashboard.putNumber("Max Acceleration", Robot.dt.maxAcceleration);
-		
-		if(Robot.dt.getVelocity() > maxVelocity) {
-			maxVelocity = Robot.dt.getVelocity();
-		}
-		SmartDashboard.putNumber("Max Velocity", maxVelocity);
-
 		
     }
 

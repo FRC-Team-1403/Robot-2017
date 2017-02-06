@@ -1,5 +1,7 @@
 package trajectoryLib.trajectory;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * PID + Feedforward controller for following a Trajectory.
  *
@@ -12,10 +14,13 @@ public class TrajectoryFollower {
   private double kd_;
   private double kv_;
   private double ka_;
-  private double last_error_;
+  public double last_error_;
   private double current_heading = 0;
   private int current_segment;
   private Trajectory profile_;
+  
+  public double segmentVel = 0;
+  public double segmentPos = 0;
 
   public TrajectoryFollower() {
 
@@ -49,6 +54,8 @@ public class TrajectoryFollower {
       current_heading = segment.heading;
       current_segment++;
       //System.out.println("so far: " + distance_so_far + "; output: " + output);
+      segmentVel = segment.vel;
+      segmentPos = segment.pos;
       return output;
     } else {
       return 0;
