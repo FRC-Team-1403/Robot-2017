@@ -18,6 +18,7 @@ import org.usfirst.frc.team1403.robot.commands.DriveAuto;
 ///import org.usfirst.frc.team1403.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1403.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team1403.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1403.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,9 +28,9 @@ import org.usfirst.frc.team1403.robot.subsystems.DriveTrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static DriveTrain dt;
+	public static Intake intake;
 	public static OI oi;
 	public static Path lowBarPath;
 
@@ -42,26 +43,29 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		//SmartDashboard.putNumber("Setpoint in feet", 0);
+		SmartDashboard.putNumber("kP", 0);
 		//SmartDashboard.putNumber("kTurn", 0);
 		dt = new DriveTrain();
+		intake = new Intake();
 		oi = new OI();
+		// chooser.addDefault("Default Auto", new ExampleCommand()); 
+		// chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putNumber("kTurn", 0);
+		
 		TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 		double kWheelbaseWidth = 23.5/12;
-		config.dt = 0.02;
-		config.max_acc = 30.0;
-		config.max_jerk = 40.0;
-		config.max_vel = 9.0;
+		config.dt = .02;
+	    config.max_acc = 6.8;
+	    config.max_jerk = 40.0;
+	    config.max_vel = 6.8;
 		String path_name = "LowBarPath";
 		WaypointSequence waypointsequence = new WaypointSequence(10);
 		waypointsequence.addWaypoint(new Waypoint(0, 0, 0));
-		waypointsequence.addWaypoint(new Waypoint(0.5, 0.5, 0));
-		//waypointsequence.addWaypoint(new Waypoint(1, 1, Math.PI/4));
+		//waypointsequence.addWaypoint(new Waypoint(4, 0, 0));
+		waypointsequence.addWaypoint(new Waypoint(6, 1.15, Math.PI/3));
 		lowBarPath = PathGenerator.makePath(waypointsequence, config, kWheelbaseWidth, path_name);
-		//chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-	
-		
 	}
 
 	/**
@@ -71,7 +75,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		
 	}
 
 	@Override
@@ -92,9 +96,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		
+		
 		autonomousCommand = chooser.getSelected();
 		//autonomousCommand = new ExampleCommand();
-		
 		 String autoSelected = SmartDashboard.getString("Auto Selector",
 		 "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 = new DriveAuto(); break; case "Default Auto": default:
@@ -112,8 +118,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		
-		
+		SmartDashboard.getNumber("kTurn", 0);
 	}
 
 	@Override

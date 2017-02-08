@@ -18,12 +18,19 @@ public class TrajectoryDriveController {
   public TrajectoryDriveController() {
     init();
   }
+  
+  public TrajectoryDriveController(double kV, double kA, double kP, double kTurn) {
+	  followerLeft.configure(kP, 0, 0, kV, kA);
+	  followerRight.configure(kP, 0, 0, kV, kA);
+	  this.kTurn = kTurn;
+  }
+  
   Trajectory trajectory;
   TrajectoryFollower followerLeft = new TrajectoryFollower();
   TrajectoryFollower followerRight = new TrajectoryFollower();
   double direction;
   double heading;
-  double kTurn = -3.0/80.0;
+  public double kTurn = 0;
   boolean enabled = false;
 
   public boolean onTarget() {
@@ -31,8 +38,8 @@ public class TrajectoryDriveController {
   }
 
   private void init() {
-    followerLeft.configure(1.5, 0, 0, 1.0/15.0, 1.0/34.0);
-    followerRight.configure(1.5, 0, 0, 1.0/15.0, 1.0/34.0);
+    followerLeft.configure(0, 0, 0, 1.0/1.0, 1.0/10.0);
+    followerRight.configure(0, 0, 0, 1.0/1.0, 1.0/10.0);
   }
 
   public void loadProfile(Trajectory leftProfile, Trajectory rightProfile, double direction, double heading) {
@@ -72,8 +79,8 @@ public class TrajectoryDriveController {
     if (onTarget()) {
       Robot.dt.setLeftRightPower(0.0, 0.0);
     } else  {
-      double distanceL = direction * Robot.dt.leftEncoder.get();
-      double distanceR = direction * Robot.dt.rightEncoder.get();
+      double distanceL = direction * Robot.dt.getLeftEncoderInFeet();
+      double distanceR = direction * Robot.dt.getRightEncoderInFeet();
 
       double speedLeft = direction * followerLeft.calculate(distanceL);
       double speedRight = direction * followerRight.calculate(distanceR);
@@ -85,12 +92,23 @@ public class TrajectoryDriveController {
       double angleDiff = Math.toDegrees(angleDiffRads);
 
       double turn = kTurn * angleDiff;
-      //Robot.dt.setLeftRightPower(speedLeft + turn, speedRight - turn);
-      Robot.dt.setLeftRightPower(speedLeft, speedRight);
+      Robot.dt.setLeftRightPower(speedLeft + turn, speedRight - turn);
+     // Robot.dt.setLeftRightPower(speedLeft, speedRight);
+      SmartDashboard.putNumber("Left Velocity from algorithm", followerLeft.segmentVel);
+      SmartDashboard.putNumber("Right Velocity from algorithm", followerRight.segmentVel);
+      
+      SmartDashboard.putNumber("Left Position from algorithm", followerLeft.segmentPos);
+      SmartDashboard.putNumber("Right Position from algorithm", followerRight.segmentPos);
+      
       SmartDashboard.putNumber("speedLeft", speedLeft);
       SmartDashboard.putNumber("speedRight", speedRight);
-      SmartDashboard.putNumber("speedLeft + turn", speedLeft + turn);
-      SmartDashboard.putNumber("speedRight - turn", speedRight - turn);
+      
+      SmartDashboard.putNumber("Left "
+      		+ ""
+      		+ "Error", followerLeft.last_error_);
+      SmartDashboard.putNumber("Right Error", followerRight.last_error_);
+      //SmartDashboard.putNumber("speedLeft + turn", speedLeft + turn);
+      //SmartDashboard.putNumber("speedRight - turn", speedRight - turn);
     }
   }
 

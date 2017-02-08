@@ -14,6 +14,7 @@ public class TrajectoryGenerator {
     public double max_vel;
     public double max_acc;
     public double max_jerk;
+    
   }
 
   public static class Strategy {
