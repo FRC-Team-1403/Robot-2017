@@ -15,6 +15,7 @@ public class DriveAuto extends Command {
 	
 
     public DriveAuto() {
+    	
         // Use requires() here to declare subsystem dependencies
         requires(Robot.dt);
         //kV, kA, kP, kTurn
