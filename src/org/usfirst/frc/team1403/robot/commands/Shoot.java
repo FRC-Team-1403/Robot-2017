@@ -31,7 +31,7 @@ public class Shoot extends Command {
     protected void execute() {
     	 {
     		 //stable sate is the current rate
-    		 stablerate = Robot.fw.e.getRate();
+    		 stablerate = Robot.leftShooter.e.getRate();
     		 System.out.println(stablerate);
     
     		 //Robot.fw.v.set(value);
@@ -43,19 +43,19 @@ public class Shoot extends Command {
     	    		if(!(Math.abs(stablerate-targetrate)<200)){
     	    			if((stablerate-targetrate)>1000){
     	    				value +=0.02;
-    	    				Robot.fw.v.set(-value);
+    	    				Robot.leftShooter.v.set(-value);
     	    			}
     	    			else if((stablerate-targetrate)<1000){
     	    				value -=0.02;
-    	    				Robot.fw.v.set(-value);
+    	    				Robot.leftShooter.v.set(-value);
     	    			}
     	    			else if((stablerate-targetrate)>500){
     	    				value +=0.01;
-    	    				Robot.fw.v.set(-value);
+    	    				Robot.leftShooter.v.set(-value);
     	    			}
     	    			else if((stablerate-targetrate)<500){
     	    				value -=0.01;
-    	    				Robot.fw.v.set(-value);
+    	    				Robot.leftShooter.v.set(-value);
     	    			}
     	    			
     	    			
@@ -72,10 +72,10 @@ public class Shoot extends Command {
     	    	else if(keepingit){
     	    		SmartDashboard.putBoolean("init", false);
     	    		SmartDashboard.putBoolean("keepingit", true);
-    	    		SmartDashboard.putNumber("final ticks per second", Robot.fw.e.getRate());
+    	    		SmartDashboard.putNumber("final ticks per second", Robot.leftShooter.e.getRate());
     	    		SmartDashboard.putNumber("valllue",value);
     	    		
-    	    		Robot.fw.v.set(-value);
+    	    		Robot.leftShooter.v.set(-value);
     	    	}
     	    	
     	    	
@@ -84,10 +84,10 @@ public class Shoot extends Command {
 		
     	
     }
-    	 SmartDashboard.putNumber("Velocity", Robot.fw.e.getRate());
-     	SmartDashboard.putNumber("Position", Robot.fw.e.get());
-     	SmartDashboard.putNumber("flywheel set value", Robot.fw.v.get());
-     	SmartDashboard.putNumber("rpm velocity", (Robot.fw.v.get()/256));
+    	 SmartDashboard.putNumber("Velocity", Robot.leftShooter.e.getRate());
+     	SmartDashboard.putNumber("Position", Robot.leftShooter.e.get());
+     	SmartDashboard.putNumber("flywheel set value", Robot.leftShooter.v.get());
+     	SmartDashboard.putNumber("rpm velocity", (Robot.leftShooter.v.get()/256));
      	
     }
 
