@@ -19,7 +19,7 @@ public class Shoot extends Command {
 
     public Shoot() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.fw);
+        requires(Robot.leftShooter);
     }
 
     // Called just before this Command runs the first time

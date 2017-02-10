@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
     	
     	//the encoders use the ports in robotmap
     	leftEncoder = new Encoder(RobotMap.leftEncoder1, RobotMap.leftEncoder2);
-    	leftEncoder = new Encoder(RobotMap.rightEncoder1, RobotMap.rightEncoder2);
+    	rightEncoder = new Encoder(RobotMap.rightEncoder1, RobotMap.rightEncoder2);
     	
     	//Set the distance per pulse as the feet per tick ratio in order to use feet for all motion mapping calculations
     	leftEncoder.setDistancePerPulse(RobotMap.feetPerTick);

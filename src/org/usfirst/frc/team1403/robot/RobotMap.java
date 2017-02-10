@@ -37,6 +37,8 @@ public class RobotMap {
 	public static int rightShooterEncoder1 = 0;
 	public static int rightShooterEncoder2 = 0;
 	
+	public static double shooterRPM = 0;
+	
 	//feeder ports
 	public static int leftFeeder = 0;
 	public static int rightFeeder = 0;

@@ -15,7 +15,7 @@ public class Shoot2 extends Command {
 	double targetRate = (-rpm/0.24);
     public Shoot2() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.fw);
+        requires(Robot.leftShooter);
     }
 
     // Called just before this Command runs the first time

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 //import org.usfirst.frc.team1403.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team1403.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1403.robot.commands.HalfSpeed;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator

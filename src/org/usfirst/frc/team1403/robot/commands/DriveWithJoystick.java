@@ -3,27 +3,32 @@ package org.usfirst.frc.team1403.robot.commands;
 import org.usfirst.frc.team1403.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class JustTesting extends Command {
+public class DriveWithJoystick extends Command {
 
-    public JustTesting() {
+    public DriveWithJoystick() {
         // Use requires() here to declare subsystem dependencies
- requires(Robot.fw);
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.fw.v.set(0.10*Robot.oi.stick.getRawAxis(1));
+    	//negative because the pixel xy plane starts from the top - Alex... yeah just ignore this
+    	if(Robot.oi.djoy.getRawButton(6)) {
+    		Robot.driveTrain.setLeftRightPower(-Robot.oi.djoy.getRawAxis(1), -Robot.oi.djoy.getRawAxis(5), .5);
+    	}
+    	else {
+    		Robot.driveTrain.setLeftRightPower(-Robot.oi.djoy.getRawAxis(1), -Robot.oi.djoy.getRawAxis(5));
+    	}
     	
-    	SmartDashboard.putNumber("fur mayank", Robot.fw.e.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
