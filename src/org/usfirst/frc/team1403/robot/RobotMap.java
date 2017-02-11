@@ -28,6 +28,7 @@ public class RobotMap {
 	public static int leftEncoder2 = 0;
 	public static int rightEncoder1 = 0;
 	public static int rightEncoder2 = 0;
+	public static int gyro = 0;
 	
 	//shooter ports
 	public static int leftWheel = 0;

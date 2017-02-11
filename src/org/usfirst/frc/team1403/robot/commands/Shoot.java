@@ -1,108 +1,35 @@
 package org.usfirst.frc.team1403.robot.commands;
 
-import org.usfirst.frc.team1403.robot.Robot;
+import org.usfirst.frc.team1403.robot.commands.feeders.StartBothFeeders;
+import org.usfirst.frc.team1403.robot.commands.shooters.PowerUpBothShooters;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Shoot extends Command {
-	
-	double value = 0.65;
-	double targetrate =-14100;
-	boolean init = true;
-	boolean keepingit= false;
-	double stablerate;
-
+public class Shoot extends CommandGroup {
 
     public Shoot() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.leftShooter);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	//Robot.fw.e.setReverseDirection(true);
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	 {
-    		 //stable sate is the current rate
-    		 stablerate = Robot.leftShooter.e.getRate();
-    		 System.out.println(stablerate);
-    
-    		 //Robot.fw.v.set(value);
-    		 SmartDashboard.putNumber("value", value);
-    	    	if(init){
-    	    		SmartDashboard.putBoolean("init", true);
-    	    		
-    	    		
-    	    		if(!(Math.abs(stablerate-targetrate)<200)){
-    	    			if((stablerate-targetrate)>1000){
-    	    				value +=0.02;
-    	    				Robot.leftShooter.v.set(-value);
-    	    			}
-    	    			else if((stablerate-targetrate)<1000){
-    	    				value -=0.02;
-    	    				Robot.leftShooter.v.set(-value);
-    	    			}
-    	    			else if((stablerate-targetrate)>500){
-    	    				value +=0.01;
-    	    				Robot.leftShooter.v.set(-value);
-    	    			}
-    	    			else if((stablerate-targetrate)<500){
-    	    				value -=0.01;
-    	    				Robot.leftShooter.v.set(-value);
-    	    			}
-    	    			
-    	    			
-    	    			else{}
-    	    				
-    	    		}
-    	    		else{
-    	    		init = false;
-    	    		SmartDashboard.putBoolean("init", false);
-    	    		keepingit = true;
-    	    		}
-    	    	
-    	    	}
-    	    	else if(keepingit){
-    	    		SmartDashboard.putBoolean("init", false);
-    	    		SmartDashboard.putBoolean("keepingit", true);
-    	    		SmartDashboard.putNumber("final ticks per second", Robot.leftShooter.e.getRate());
-    	    		SmartDashboard.putNumber("valllue",value);
-    	    		
-    	    		Robot.leftShooter.v.set(-value);
-    	    	}
-    	    	
-    	    	
-    	    
-		
-		
     	
-    }
-    	 SmartDashboard.putNumber("Velocity", Robot.leftShooter.e.getRate());
-     	SmartDashboard.putNumber("Position", Robot.leftShooter.e.get());
-     	SmartDashboard.putNumber("flywheel set value", Robot.leftShooter.v.get());
-     	SmartDashboard.putNumber("rpm velocity", (Robot.leftShooter.v.get()/256));
-     	
-    }
+    	addSequential(new PowerUpBothShooters());
+    	addSequential(new StartBothFeeders());
+    	
+        // Add Commands here:
+        // e.g. addSequential(new Command1());
+        //      addSequential(new Command2());
+        // these will run in order.
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+        // To run multiple commands at the same time,
+        // use addParallel()
+        // e.g. addParallel(new Command1());
+        //      addSequential(new Command2());
+        // Command1 and Command2 will run in parallel.
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
+        // A command group will require all of the subsystems that each member
+        // would require.
+        // e.g. if Command1 requires chassis, and Command2 requires arm,
+        // a CommandGroup containing them would require both the chassis and the
+        // arm.
     }
 }
-
