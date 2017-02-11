@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1403.robot.commands;
 
-import org.usfirst.frc.team1403.robot.commands.feeders.StartBothFeeders;
-import org.usfirst.frc.team1403.robot.commands.shooters.PowerUpBothShooters;
+
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -12,8 +11,9 @@ public class Shoot extends CommandGroup {
 
     public Shoot() {
     	
-    	addSequential(new PowerUpBothShooters());
-    	addSequential(new StartBothFeeders());
+    	addSequential(new PowerUpShooters());
+    	addParallel(new RunFeeders());
+    	addSequential(new MaintainShooters());
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

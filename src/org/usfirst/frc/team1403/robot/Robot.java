@@ -28,10 +28,8 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Intake intake;
 	public static GearPusher gearPusher;
-	public static FlyWheel leftShooter;
-	public static FlyWheel rightShooter;
-	public static Feeder leftFeeder;
-	public static Feeder rightFeeder;
+	public static FlyWheel shooter;
+	public static Feeder feeder;
 	public static OI oi;
 	
 	Command autonomousCommand;
@@ -47,10 +45,8 @@ public class Robot extends IterativeRobot {
 		intake = new Intake();
 		gearPusher = new GearPusher();
 		//shooters and feeders need their ports in the constructor because there are more than one of them, so the ports can't be assigned from within the class
-		leftShooter = new FlyWheel(RobotMap.leftWheel, RobotMap.leftShooterEncoder1, RobotMap.leftShooterEncoder2);
-		rightShooter = new FlyWheel(RobotMap.rightWheel, RobotMap.rightShooterEncoder1, RobotMap.rightShooterEncoder2);
-		leftFeeder = new Feeder(RobotMap.leftFeeder);
-		rightFeeder = new Feeder(RobotMap.rightFeeder);
+		shooter = new FlyWheel();
+		feeder = new Feeder();
 		oi = new OI();
 		
 		//initialize editable SmartDashboard numbers

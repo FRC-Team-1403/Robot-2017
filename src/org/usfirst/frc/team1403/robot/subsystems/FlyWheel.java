@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1403.robot.subsystems;
 
 
+import org.usfirst.frc.team1403.robot.RobotMap;
 import org.usfirst.frc.team1403.robot.commands.Shoot;
 import org.usfirst.frc.team1403.robot.commands.Shoot2;
 
@@ -17,17 +18,26 @@ public class FlyWheel extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public CANTalon wheel;
-	public Encoder encoder;
+	public CANTalon leftShooter;
+	public CANTalon rightShooter;
 	
-	public FlyWheel(int wheelPort) {
-		wheel = new CANTalon(wheelPort);
+	public FlyWheel() {
+		leftShooter = new CANTalon(RobotMap.leftWheel);
+		rightShooter = new CANTalon(RobotMap.rightWheel);
 	}
 	
-	public FlyWheel(int wheelPort, int encoderPort1, int encoderPort2)
-	{
-		wheel = new CANTalon(wheelPort);
-		encoder = new Encoder(encoderPort1, encoderPort2);
+	public void stop() {
+		leftShooter.set(0);
+		rightShooter.set(0);
+	}
+	
+	//TODO make sure getAnalogInVelocity works
+	public double getLeftRPM() {
+		return leftShooter.getAnalogInVelocity();
+	}
+	
+	public double getRightRPM() {
+		return rightShooter.getAnalogInVelocity();
 	}
 
     public void initDefaultCommand() {
