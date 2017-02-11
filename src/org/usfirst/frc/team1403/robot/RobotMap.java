@@ -31,18 +31,20 @@ public class RobotMap {
 	public static int gyro = 0;
 	
 	//shooter ports
-	public static int leftWheel = 0;
-	public static int rightWheel = 0;
+	public static int leftFlyWheel = 0;
+	public static int rightFlyWheel = 0;
 	public static int leftShooterEncoder1 = 0;
 	public static int leftShooterEncoder2 = 0;
 	public static int rightShooterEncoder1 = 0;
 	public static int rightShooterEncoder2 = 0;
 	
 	public static double shooterRPM = 0;
+	public static double rotationsPerTick = 0;
 	
 	//feeder ports
 	public static int leftFeeder = 0;
 	public static int rightFeeder = 0;
+	public static double inchesPerTick = 0;
 	
 	//intake ports
 	public static int intakeRoller = 0;

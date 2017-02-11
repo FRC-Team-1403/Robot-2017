@@ -22,8 +22,8 @@ public class FlyWheel extends Subsystem {
 	public CANTalon rightShooter;
 	
 	public FlyWheel() {
-		leftShooter = new CANTalon(RobotMap.leftWheel);
-		rightShooter = new CANTalon(RobotMap.rightWheel);
+		leftShooter = new CANTalon(RobotMap.leftFlyWheel);
+		rightShooter = new CANTalon(RobotMap.rightFlyWheel);
 	}
 	
 	public void stop() {
@@ -33,11 +33,11 @@ public class FlyWheel extends Subsystem {
 	
 	//TODO make sure getAnalogInVelocity works
 	public double getLeftRPM() {
-		return leftShooter.getAnalogInVelocity();
+		return leftShooter.getAnalogInVelocity() * RobotMap.rotationsPerTick;
 	}
 	
 	public double getRightRPM() {
-		return rightShooter.getAnalogInVelocity();
+		return rightShooter.getAnalogInVelocity() * RobotMap.rotationsPerTick;
 	}
 
     public void initDefaultCommand() {

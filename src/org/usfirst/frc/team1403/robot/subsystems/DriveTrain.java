@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getAngleInRadians() {
-    	return gyro.getAngle() * 3.14/180;
+    	return gyro.getAngle() * Math.PI/180;
     }
     
 }

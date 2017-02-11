@@ -45,6 +45,24 @@ public class Feeder extends Subsystem {
 		leftFeeder.set(0);
 		rightFeeder.set(0);
 	}
+	
+	//A vex encoder is attached to breakout board on the CANTalons. These methods are for measurements
+	//TODO test these methods
+	public double getLeftFeederPosition() {
+		return leftFeeder.getAnalogInRaw() * RobotMap.inchesPerTick;
+	}
+	
+	public double getLeftFeederVelocity() {
+		return leftFeeder.getAnalogInVelocity() * RobotMap.inchesPerTick;
+	}
+	
+	public double getRightFeederPosition() {
+		return rightFeeder.getAnalogInRaw() * RobotMap.inchesPerTick;
+	}
+	
+	public double getRightFeederVelocity() {
+		return rightFeeder.getAnalogInVelocity() * RobotMap.inchesPerTick;
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
