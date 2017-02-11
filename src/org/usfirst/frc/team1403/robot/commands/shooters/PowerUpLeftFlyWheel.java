@@ -11,7 +11,7 @@ public class PowerUpLeftFlyWheel extends Command {
 	//TODO  CANTalon PID control for left shooter
     public PowerUpLeftFlyWheel() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.leftShooter);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
