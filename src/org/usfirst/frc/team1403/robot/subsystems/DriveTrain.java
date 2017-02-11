@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1403.robot.subsystems;
 
 import org.usfirst.frc.team1403.robot.RobotMap;
-import org.usfirst.frc.team1403.robot.commands.Drive;
+
+import org.usfirst.frc.team1403.robot.commands.DriveWithJoystick;
 
 import com.ctre.CANTalon;
 
@@ -45,7 +46,7 @@ public class DriveTrain extends Subsystem {
     }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new Drive());
+        setDefaultCommand(new DriveWithJoystick());
         
     }
     

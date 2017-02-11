@@ -19,13 +19,17 @@ public class Intake extends Subsystem {
 	public Intake() {
 		roller = new CANTalon(RobotMap.intakeRoller);
 	}
-	
+	//TODO figure out intake direction
 	public void rollersIn() {
 		roller.set(1);
 	}
 	
 	public void rollersOut() {
 		roller.set(-1);
+	}
+	
+	public void stopRollers() {
+		roller.set(0);
 	}
 
     public void initDefaultCommand() {
