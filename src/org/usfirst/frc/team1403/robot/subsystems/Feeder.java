@@ -8,13 +8,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Feeder extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	
+	//TODO make sure rollers move in the correct direction
 	public CANTalon roller;
 	
 	public Feeder(int port) {
 		roller = new CANTalon(port);
+	}
+	
+	public void start() {
+		roller.set(1);
+	}
+	
+	public void stop() {
+		roller.set(0);
+	}
+	
+	public void goReverse() {
+		roller.set(-1);
 	}
 
     public void initDefaultCommand() {
